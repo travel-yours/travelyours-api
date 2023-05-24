@@ -1,37 +1,28 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
-const User = require("../travelyours-api/app/models/user"); // Import model User
-const userImages = require("../travelyours-api/app/models/userImages");
-const mongodb = require("../travelyours-api/app/database/mongodb"); // Import file mongodb.js
+const User = require("./app/models/user"); // Import model User
+const userImages = require("./app/models/userImages");
+const mongodb = require("./app/database/mongodb"); // Import file mongodb.js
+const addUser = require("./app/controllers/userController");
+const getUser = require("./app/controllers/authController");
+const path = require("path");
 
 dotenv.config();
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.post("/users", async (req, res) => {
-  try {
-    const { name, no_hp, email, password, age, imageUrl } = req.body;
+// ENDPOINT
 
-    // Buat objek user baru dengan data yang diterima dari request
-    const newUser = new User({
-      name,
-      no_hp,
-      email,
-      password,
-      age,
-      imageUrl,
-    });
+app.post("/login", getUser);
+app.post("/register", addUser, (req, res) => {
+  res.sendFile(path.join(__dirname, "app/public", "register.html"));
+});
 
-    // Simpan user ke MongoDB
-    const savedUser = await newUser.save();
-
-    res.status(201).json(savedUser);
-  } catch (err) {
-    console.error("Error creating user:", err);
-    res.status(500).json({ error: "Failed to create user" });
-  }
+// STILL DEVELOP
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "app/public", "app.html"));
 });
 
 app.post("/userImage", async (req, res) => {

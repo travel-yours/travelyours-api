@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "refined-vector-381300",
+  "private_key_id": "6b2092a553ac5513c533eae1fe119f0d93288d79",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrHKyUEa7alzJN\nBCkck2dQntKcrYXl2+YiUhrnC0QYMrOD/bd++WhTDLsHGIWZAlwbivnZvGfWAyg4\nnGUb1tjJRmhu4GFYJkaEACQ3UQtkTVAGZycI6VssYccrXJpvNEsTlLnJ92WGT8kE\nRa3h1i8r981DcA3DJ+YY2Cq7ymNS/8iiNwgub31UDTmkzSyy0t+Zf+H8muc+pbLH\ng54VzQIHLWrVfv+NWUQxb+hgNI/2jfAMawpqdq3nWuCkJ79SwPX3qhTz5KjkttYH\nNi6rYIphZjzLSJ+2CgEa9oJ0c7QlIPENswNynt0tZ0sdiJvbl8g2LM0yqLbB/gxa\nzufrO7WpAgMBAAECggEAP8Xolij/A64tS6H81o8jhtsiwM01ZcVuwKTcLPc4clJX\nMJ7biGHZHXbVr9/WTwAfpw5Fb362Ln+vumWjk1wgIOfyXTyYWzustV6+ILW+aqwb\n4r8IP9yFJAXvLryNPFv/jTU1h04C0yuiTkrP8ycaHqd1I6i8IFua+PB8ANB98z0P\nEQCkrKSXrUdzt02ehk2SXqhXGFwLoCmqCbSi9PJt2tfWSn6cyDLKZU2YvF4l7pEJ\nschz5EOHGnPOxK9kMKVVvmCwvtxWut+pWD4FKnnYHPTD82On1aR8OTLPtMMrt9si\noMnnrGTgSkaGoCQw2amW9iIpZPHvlXeb7uiUtEJNXwKBgQDw8bVvYUnwHg8aHoL+\nwsvyoOy/lsSsU+LSVEuiGV/JoKsVDlbVOUZg060sdfqpjuZ+X6S/feMRmvbH1YwM\ns41Mfy2IkG2cexq3/pdI0eE19R1qV7QEVZaauaZkN+Q2eh7Q794urZ2SkyLXJdqk\nzOf9PXU+z5eJ2Fcd0oKj98uJBwKBgQC1zeMZLvuNLkmzWrJG7L2EF4sf1UiSNbj0\nXBygql+OLD/SexqG4FU/JWUOSMkeIRuYZ0z8SLbwCQ1vBcnHMgXEe5ma8iaDP1d5\n13jf0WKVyfVVJWRp5L9IXcUjRu6/DXDUYKF3Ao2mJrfLuM6OK/s2NZKhwnyNK3rz\nLjRSHLuPzwKBgAOR4TlMPLc1Cs49Q32Yz0LCBZ/1EObou0SYgSJes9+d5MsEEl9I\nYPWQTVGKUfNvLZUTv7IioFmjbSKa1F9fzakjfT43vZgC7uto9z7Z9TdCcXQg5obl\n6bxTIdb8SQJRnuFDnIwegGYqjeqYIfwtGQbUgUcz9i/Rp8DGXK8nPbnDAoGBAKhY\n5CfXt5u99wUbwOWoJr2AR5XMnAy3rnKoMOIdoao3E0pGMAQhCw8UA4W8pG8/3Ru8\n3C7o7m1LFKNvyq6nhWuxwEUYYc07BDeQ7R7j9tQZVRHpNBhSd0X9fqTx8/X57jba\n2+kl9iCazarZkHtaAp7p8MPVIhxe3NT+PfijHpNFAoGADxqSNQ+BnL4a/w6HVi/K\nb23wmHTfgrdBIwsmnywF69WbcofLqn0vOoSSTQXOdCtICN730vC7oOxtE5R8xc5n\nodPQEvkCkn1MHpH/dMuMR9cxiZFHrYz/ju1931DO9XzCjShsj4la7OQTXBxTUO3h\njpPGaAcvXNGCiWauuI25Ixg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "travel-bucket-service@refined-vector-381300.iam.gserviceaccount.com",
+  "client_id": "108777207326211703396",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/travel-bucket-service%40refined-vector-381300.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

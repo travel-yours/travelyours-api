@@ -9,7 +9,7 @@ const getUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(403).json({ error: "Invalid Login"});
+      return res.status(403).json({ error: "Invalid Login" });
     }
 
     // Bandingkan password yang diinputkan dengan password di database
@@ -27,7 +27,17 @@ const getUser = async (req, res) => {
       httpOnly: true,
     });
 
-    res.json(`${email} telah login`)
+    res.status(200).json({
+      message: "Success",
+      data: {
+        nama: user.name,
+        noHP: user.no_hp,
+        email: user.email,
+        password: user.password,
+        createdAt: user.createdAt,
+        token: token,
+      },
+    });
   } catch (error) {
     return res.status(500).json({ error: "Internal Server Error" });
   }

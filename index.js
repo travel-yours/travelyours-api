@@ -15,9 +15,10 @@ app.use(express.json());
 // ENDPOINT
 
 app.post("/login", getUser);
-app.post("/register", addUser, (req, res) => {
+app.get("/register", async (req, res, next) => {
   res.sendFile(path.join(__dirname, "app/public", "register.html"));
 });
+app.post("/register", addUser);
 
 // STILL DEVELOP
 app.use(express.static(path.join(__dirname, "public")));

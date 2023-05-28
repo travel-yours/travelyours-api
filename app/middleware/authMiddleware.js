@@ -15,7 +15,7 @@ const requireAuth = (req, res, next) => {
   const token = req.headers.authorization;
 
   if (!token) {
-    res.status(httpStatus.UNAUTHORIZED).json(response);
+    res.status(404).json(response);
     return;
   }
 
@@ -23,7 +23,7 @@ const requireAuth = (req, res, next) => {
 
   jwt.verify(myToken, process.env.KEY, async (error, payload) => {
     if (error) {
-      res.status(httpStatus.UNAUTHORIZED).json(response);
+      res.status(404).json(response);
       return;
     }
     const id = payload.id;

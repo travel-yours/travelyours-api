@@ -11,6 +11,8 @@ const keyFile = path.join(__dirname, "gcskey.json");
 const storage = new Storage({ keyFilename: keyFile });
 const bucket = storage.bucket("travel-storage");
 
+
+
 // Create a new handler for the upload route
 const uploadHandler = async (req, res) => {
   try {
@@ -61,5 +63,7 @@ const uploadHandler = async (req, res) => {
     });
   }
 };
+
+const getUser = async (req, res) => {}
 
 module.exports = uploadHandler;

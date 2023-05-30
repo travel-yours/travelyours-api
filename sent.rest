@@ -1,11 +1,7 @@
-POST localhost:3000/users 
+POST localhost:3000/auth/api/v1/signin 
 content-type: application/json
 
 {
     "name": "Rafli Hada Setiawan",
-    "noHp": "08971369553",
-    "email": "raflijr47@gmail.com",
-    "password": "admin",
-    "imageUrl": "google.com"
+    "password": "admin123"
 }
-

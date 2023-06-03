@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Gambar</title>
+  </head>
+  <body>
+    <h1>Input Gambar</h1>
+    <form id="imageForm" enctype="multipart/form-data">
+      <div>
+        <label for="image">Gambar:</label>
+        <input type="file" id="image" name="image" required />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const imageForm = document.getElementById("imageForm");
+
+      imageForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(imageForm);
+
+        fetch(`/destinasi?id=${_id}`, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            // Handle the response from the server
+            console.log(result);
+          })
+          .catch((error) => {
+            // Handle any errors
+            console.error(error);
+          });
+      });
+    </script>
+  </body>
+</html>

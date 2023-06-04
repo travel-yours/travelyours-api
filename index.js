@@ -30,19 +30,39 @@ app.use(express.urlencoded({ extended: true }));
 app.use(appendUrl("/auth"), authRouter);
 // app.post(appendUrl("/"),authController.signIn)
 app.post("/upload", uploadHandler);
-app.use("/destinations", destRouter);
+// app.use("/destinations", destRouter);
 
+// Get Data By Id - Destinasi
 app.get("/destination/:id", (req, res) => {
   const { id } = req.params;
   Destinations.findById(id)
     .then((data) => {
-      res.status(200).json(data);
+      // Mengatur indentasi menjadi 2 spasi
+      const jsonData = JSON.stringify(data, null, 2);
+      res.type("application/json").send(jsonData);
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json({ message: "Can't Get the Data" });
     });
 });
+
+
+// Get All Data - Destinasi
+app.get("/destinations", (req, res) => {
+  Destinations.find({})
+    .exec()
+    .then((data) => {
+      // Mengatur indentasi menjadi 2 spasi
+      const jsonData = JSON.stringify(data, null, 2);
+      res.type("application/json").send(jsonData);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ message: "Error retrieving data" });
+    });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

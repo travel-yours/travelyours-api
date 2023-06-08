@@ -24,6 +24,10 @@ const signIn = async (req, res) => {
       expiresIn: "7d",
     });
 
+    const transformedUser = user.toObject();
+    transformedUser.userId = transformedUser._id;
+    delete transformedUser._id;
+
     res.cookie("token", token, {
       httpOnly: true,
     });
@@ -31,15 +35,16 @@ const signIn = async (req, res) => {
     res.status(200).json({
       message: "Success",
       data: {
-        nama: user.name,
-        email: user.email,
-        password: user.password,
-        createdAt: user.createdAt,
+        nama: transformedUser.name,
+        email: transformedUser.email,
+        password: transformedUser.password,
+        createdAt: transformedUser.createdAt,
+        userId: transformedUser.userId,
         token: token,
       },
     });
 
-    console.log(`${user.email} telah login`)
+    console.log(`${user.email} telah login`);
   } catch (error) {
     return res.status(500).json({ error: "Internal Server Error" });
   }
@@ -62,7 +67,7 @@ const signUp = async (req, res) => {
       "https://storage.googleapis.com/travel-storage/default-profile.png";
 
     const savedUser = await newUser.save();
-    
+
     const transformedUser = savedUser.toObject();
     transformedUser.userId = transformedUser._id;
     delete transformedUser._id;
@@ -74,6 +79,5 @@ const signUp = async (req, res) => {
     res.status(500).json({ message: "Error saving user" });
   }
 };
-
 
 module.exports = { signIn, signUp };

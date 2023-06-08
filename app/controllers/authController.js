@@ -32,7 +32,6 @@ const signIn = async (req, res) => {
       message: "Success",
       data: {
         nama: user.name,
-        noHP: user.no_hp,
         email: user.email,
         password: user.password,
         createdAt: user.createdAt,
@@ -50,12 +49,8 @@ const signUp = async (req, res) => {
   const request = await userValidator.validateAsync(req.body);
   try {
     const userEmail = await User.findOne({ email: request.email });
-    const userno_hp = await User.findOne({ no_hp: request.no_hp });
     if (userEmail) {
       return res.status(400).json({ message: "Email Already Exists" });
-    }
-    if (userno_hp) {
-      return res.status(400).json({ message: "Phone Already Exists" });
     }
     // Meng-hash password sebelum menyimpannya
     const saltRounds = 10; // Specify the desired number of salt rounds

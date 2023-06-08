@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(appendUrl("/auth"), authRouter);
 // app.post(appendUrl("/"),authController.signIn)
 app.post("/upload", uploadHandler);
-// app.use("/destinations", destRouter);
+app.use("/destinations", destRouter);
 
 // Get Data By Id - Destinasi
 app.get("/destination/:id", (req, res) => {

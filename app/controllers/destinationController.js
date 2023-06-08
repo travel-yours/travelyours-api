@@ -10,7 +10,17 @@ const storage = new Storage({ keyFilename: keyFile });
 const bucket = storage.bucket("travel-storage");
 
 const addDestinations = async (req, res) => {
-  const { name, description, location, price, facilities } = req.body;
+  const {
+    name,
+    tag,
+    category,
+    jenis,
+    description,
+    location,
+    price,
+    facilities,
+    imageUrl,
+  } = req.body;
   //   const upload = new uploadHandler();
   try {
     // const destination = await Destinations.findOne({name: request.name});
@@ -19,10 +29,14 @@ const addDestinations = async (req, res) => {
     // }
     const request = {
       name,
+      tag,
+      category,
+      jenis,
       description,
       location,
       price,
       facilities,
+      imageUrl,
     };
     const newDestination = new Destinations(request);
     const savedDestination = await newDestination.save();

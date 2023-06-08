@@ -10,6 +10,11 @@ const articleSchema = new mongoose.Schema({
     required: true,
   },
 
+  tag: {
+    type: String,
+    required: true,
+  },
+
   description: {
     type: String,
   },
@@ -21,6 +26,16 @@ const articleSchema = new mongoose.Schema({
     type: Number,
   },
   facilities: [String],
+
+  category: {
+    type: String,
+    required: true,
+  },
+
+  jenis: {
+    type: String,
+    required: true,
+  },
 });
 
 const Destination = mongoose.model("Destination", articleSchema);

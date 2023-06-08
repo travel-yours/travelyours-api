@@ -1,3 +1,4 @@
 node_modules
 .env
-Diagram.drawio
+app.py
+Book1.csv

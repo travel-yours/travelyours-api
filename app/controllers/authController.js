@@ -62,12 +62,18 @@ const signUp = async (req, res) => {
       "https://storage.googleapis.com/travel-storage/default-profile.png";
 
     const savedUser = await newUser.save();
-    res.status(200).json(savedUser);
-    console.log(`Akun telah ditambahkan: `, savedUser.email);
+    
+    const transformedUser = savedUser.toObject();
+    transformedUser.userId = transformedUser._id;
+    delete transformedUser._id;
+
+    res.status(200).json(transformedUser);
+    console.log(`Akun telah ditambahkan: `, transformedUser.email);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error saving user" });
   }
 };
+
 
 module.exports = { signIn, signUp };

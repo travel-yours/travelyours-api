@@ -52,9 +52,6 @@ const signUp = async (req, res) => {
     if (userEmail) {
       return res.status(400).json({ message: "Email Already Exists" });
     }
-    if (userno_hp) {
-      return res.status(400).json({ message: "Phone Already Exists" });
-    }
     // Meng-hash password sebelum menyimpannya
     const saltRounds = 10; // Specify the desired number of salt rounds
     const hashedPassword = await bcrypt.hash(request.password, saltRounds);

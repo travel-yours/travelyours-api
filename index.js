@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
 
 // Self-ping logic
 setInterval(() => {
-  http.get('https://travelyours-api-4zcm2uhcpq-as.a.run.app/', (resp) => {
+  app.get('https://travelyours-api-4zcm2uhcpq-as.a.run.app/', (resp) => {
     // Lakukan apa pun dengan respons jika diperlukan
   });
 }, 600000); // Kirim permintaan setiap 10 menit (600000 milidetik)

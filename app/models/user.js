@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const personSchema = new Schema({
   name: { type: "string", minlength: 3, required: true },
-  no_hp: { type: Number, unique: true, required: true },
   email: { type: "string", unique: true, required: true },
   password: { type: "string", required: true },
   imageUrl: { type: "string"},

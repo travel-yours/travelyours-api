@@ -1,58 +1,87 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const User = require("./app/models/user"); // Import model User
-const userImages = require("./app/models/userImages");
-const mongodb = require("./app/database/mongodb"); // Import file mongodb.js
-const sign = require("./app/controllers/authController");
 const path = require("path");
-const uploadHandler = require("./app/controllers/userController");
+const Destinations = require("./app/models/destination");
+const morgan = require("morgan"); // Library untuk logging
 
-dotenv.config();
 const app = express();
 
-app.use(express.json());
+//CONFIGURE DOTENV
+dotenv.config();
 
 // ENDPOINT
+const authRouter = require("./app/routes/authRoutes");
+const destRouter = require("./app/routes/destinationRoutes");
+// const authController = require("./app/controllers/authController");
+const uploadHandler = require("./app/controllers/userController");
 
-app.post("/login", sign.signIn);
-app.get("/register", async (req, res) => {
-  res.sendFile(path.join(__dirname, "app/public", "register.html"));
-});
-app.post("/register", sign.signUp);
+//CONFIGURE DATABASE
+require("./app/database/mongodb");
 
-// STILL DEVELOP
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "app/public", "app.html"));
-});
-app.get("/upload", (req, res) => {
-  res.sendFile(path.join(__dirname, "app/public", "upload.html"));
-});
-// UPLAOD IMAGE STILL DEVELOP
+// Logging
+app.use(morgan("dev")); // Gunakan format logging "dev" untuk mencetak ke terminal
+
+
+// PORT AND PATH
+const PORT = process.env.PORT || 3000;
+const appendUrl = (url) => `${url}`;
+
+// MIDDLEWARE
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ROUTER
+
+app.use(appendUrl("/auth"), authRouter);
+// app.post(appendUrl("/"),authController.signIn)
 app.post("/upload", uploadHandler);
+app.use("/destinations", destRouter);
 
-app.post("/userImage", async (req, res) => {
-  try {
-    const { userId, email, imageUrl, createdAt } = req.body;
-
-    const newImage = new userImages({
-      userId,
-      email,
-      imageUrl,
-      createdAt,
+// Get Data By Id - Destinasi
+app.get("/destination/:id", (req, res) => {
+  const { id } = req.params;
+  Destinations.findById(id)
+    .then((data) => {
+      // Mengatur indentasi menjadi 2 spasi
+      const jsonData = JSON.stringify(data, null, 2);
+      res.type("application/json").send(jsonData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "Can't Get the Data" });
     });
-
-    const savedUserImage = await newImage.save();
-
-    res.status(201).json(savedUserImage);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
-  }
 });
 
-const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Get All Data - Destinasi
+app.get("/destinations", (req, res) => {
+  Destinations.find({})
+    .exec()
+    .then((data) => {
+      // Mengatur indentasi menjadi 2 spasi
+      const jsonData = JSON.stringify(data, null, 2);
+      res.type("application/json").send(jsonData);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ message: "Error retrieving data" });
+    });
+});
+
+// Endpoint health check
+app.get('/', (req, res) => {
+  res.sendStatus(200);
+});
+
+// Self-ping logic
+setInterval(() => {
+  app.get('https://travelyours-api-4zcm2uhcpq-as.a.run.app/', (resp) => {
+    // Lakukan apa pun dengan respons jika diperlukan
+  });
+}, 600000); // Kirim permintaan setiap 10 menit (600000 milidetik)
+
+
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

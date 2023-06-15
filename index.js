@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const Destinations = require("./app/models/destination");
+const { bookPackage } = require('./bookingService');
 
 const app = express();
 
@@ -63,6 +64,18 @@ app.get("/destinations", (req, res) => {
     });
 });
 
+//booking
+app.post('/booking', (req, res) => {
+  const { userID, tempatArray, kodePembayaran } = req.body;
+
+  bookPackage(userID, tempatArray, kodePembayaran)
+    .then(() => {
+      res.status(200).json({ message: 'Booking berhasil.' });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Terjadi kesalahan saat melakukan booking.' });
+    });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

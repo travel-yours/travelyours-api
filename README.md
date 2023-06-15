@@ -64,6 +64,21 @@
     },
 ```
 
+# Booking
+- Method : Post
+- URL : /booking
+
+- Example Data
+```json
+    {
+        "_id" : "648b388339595866d579b1f2"
+        "bookingId" : "6482637acbdbc53dabb2549a"
+        "userId" : "user12345"
+        "totalHarga" : 100000
+        "kodePembayaran" : "PAY12345"
+     }
+  ```
+
 # Get Data ById
 
 - Method : GET

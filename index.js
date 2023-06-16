@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const Destinations = require("./app/models/destination");
 const { bookPackage } = require('./bookingService');
+const morgan = require("morgan"); // Library untuk logging
 
 const app = express();
 
@@ -17,6 +18,10 @@ const uploadHandler = require("./app/controllers/userController");
 
 //CONFIGURE DATABASE
 require("./app/database/mongodb");
+
+// Logging
+app.use(morgan("dev")); // Gunakan format logging "dev" untuk mencetak ke terminal
+
 
 // PORT AND PATH
 const PORT = process.env.PORT || 3000;
@@ -64,6 +69,7 @@ app.get("/destinations", (req, res) => {
     });
 });
 
+
 //booking
 app.post('/booking', (req, res) => {
   const { userID, tempatArray, kodePembayaran } = req.body;
@@ -76,6 +82,19 @@ app.post('/booking', (req, res) => {
       res.status(500).json({ error: 'Terjadi kesalahan saat melakukan booking.' });
     });
 });
+
+// Endpoint health check
+app.get('/', (req, res) => {
+  res.sendStatus(200);
+});
+
+// Self-ping logic
+setInterval(() => {
+  app.get('https://travelyours-api-4zcm2uhcpq-as.a.run.app/', (resp) => {
+    // Lakukan apa pun dengan respons jika diperlukan
+  });
+}, 600000); // Kirim permintaan setiap 10 menit (600000 milidetik)
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

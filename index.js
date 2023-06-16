@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const Destinations = require("./app/models/destination");
+const { bookPackage } = require('./bookingService');
 const morgan = require("morgan"); // Library untuk logging
 
 const app = express();
@@ -68,6 +69,20 @@ app.get("/destinations", (req, res) => {
     });
 });
 
+
+//booking
+app.post('/booking', (req, res) => {
+  const { userID, tempatArray, kodePembayaran } = req.body;
+
+  bookPackage(userID, tempatArray, kodePembayaran)
+    .then(() => {
+      res.status(200).json({ message: 'Booking berhasil.' });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Terjadi kesalahan saat melakukan booking.' });
+    });
+});
+
 // Endpoint health check
 app.get('/', (req, res) => {
   res.sendStatus(200);
@@ -79,7 +94,6 @@ setInterval(() => {
     // Lakukan apa pun dengan respons jika diperlukan
   });
 }, 600000); // Kirim permintaan setiap 10 menit (600000 milidetik)
-
 
 
 app.listen(PORT, () => {

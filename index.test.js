@@ -1,6 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const User = require("./app/models/user"); // Import model User
+const userImages = require("./app/models/userImages");
+const mongodb = require("./app/database/mongodb"); // Import file mongodb.js
+const sign = require("./app/controllers/authController");
 const path = require("path");
+const { bookPackage } = require('./bookingService');
 
 const app = express();
 
@@ -33,6 +38,19 @@ app.get("/upload", (req, res) => {
 });
 app.post("/upload", uploadHandler);
 // app.use("/destinations");
+
+//booking
+app.post('/booking', (req, res) => {
+  const { userID, tempatArray, kodePembayaran } = req.body;
+
+  bookPackage(userID, tempatArray, kodePembayaran)
+    .then(() => {
+      res.status(200).json({ message: 'Booking berhasil.' });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Terjadi kesalahan saat melakukan booking.' });
+    });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

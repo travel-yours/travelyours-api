@@ -64,7 +64,6 @@
     },
 ```
 
-
 # Booking
 - Method : Post
 - URL : /booking
